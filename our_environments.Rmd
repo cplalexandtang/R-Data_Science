@@ -1,0 +1,13 @@
+Our Environments
+=================
+## Platform Infos
+```{r}
+info = list(
+  林奐宇 = "x86_64-apple-darwin15.6.0 (64-bit)",
+  段以利 = "i386-w64-mingw32/i386 (32-bit)",
+  廖永賦 = "x86_64-w64-mingw32/x64 (64-bit)",
+  沈瑞恩 = "x86_64-w64-mingw32/x64 (64-bit)",
+  謝文瑜 = "x86_64-w64-mingw32/x64 (64-bit)",
+  湯大由 = "x86_64-pc-linux-gnu (64-bit)"
+)
+```
