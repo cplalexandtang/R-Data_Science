@@ -1,0 +1,17 @@
+---
+title: ''
+output: html_document
+---
+```{r}
+library(readr)
+data <- read_csv("C:/Users/user/Documents/GitHub/R-Data_Science/data.csv")
+show(data)
+summary(data)
+```
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
