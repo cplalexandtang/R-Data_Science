@@ -1,0 +1,84 @@
+---
+title: ''
+output: html_document
+---
+> hateNTU 總資料詞頻分析
+
+```{r}
+library(Rfacebook)
+token <- 'EAACEdEose0cBAGZBfxZAt5B8Cx58nib3EOEPyQfLIiQo7DZAdX607VKZC5PCgRbmNeLGkajf1kOZB0hS5ZBuGvt4HGyZCPzZAMGHqKNyMhA1p62ZC5C0UV9vZAmhmhnwJibbhiOSYD0UnDlxx0QooSO8ZBnVmkZCOj7HWMK4w63ZB0vMbblVD2btD6YXGfxci5tTbQQFuPjQZAuglAc4Hb5p8sxErC'
+hateNTU <- getPage("hateNTU", token, n = 5000)
+
+library(readr)
+#library(tidyverse)
+library(jiebaR)
+library(dplyr)
+
+#setwd("C:/Users/user/Desktop/R/1109_Midterm/project")
+#write.csv(hateNTU$message,file = "hateNTUmessage.csv",row.names=FALSE)
+#手動把csv檔存到txt檔中
+
+#seg <- worker()
+#outputfile <- seg["C:/Users/user/Desktop/R/1109_Midterm/project/hatentutest.txt"]
+outputfile_1 <- read_table("C:/Users/user/Desktop/R/1109_Midterm/project/hatentutest_1.txt",col_names =FALSE)
+outputfile_1 <- as_tibble(table(unlist(as.data.frame(outputfile_1))))
+colnames(outputfile_1) <- c("term", "frequency_1")
+outputfile_1<-arrange(outputfile_1,desc(frequency_1))
+
+outputfile_2 <- read_table("C:/Users/user/Desktop/R/1109_Midterm/project/hatentutest_2.txt",col_names =FALSE)
+outputfile_2 <- as_tibble(table(unlist(as.data.frame(outputfile_2))))
+colnames(outputfile_2) <- c("term", "frequency_2")
+outputfile_2 <-arrange(outputfile_2,desc(frequency_2))
+
+outputfile_3 <- read_table("C:/Users/user/Desktop/R/1109_Midterm/project/hatentutest_3.txt",col_names =FALSE)
+outputfile_3 <- as_tibble(table(unlist(as.data.frame(outputfile_3))))
+colnames(outputfile_3) <- c("term", "frequency_3")
+outputfile_3 <-arrange(outputfile_3,desc(frequency_3))
+
+outputfile_4 <- read_table("C:/Users/user/Desktop/R/1109_Midterm/project/hatentutest_4.txt",col_names =FALSE)
+outputfile_4 <- as_tibble(table(unlist(as.data.frame(outputfile_4))))
+colnames(outputfile_4) <- c("term", "frequency_4")
+outputfile_4 <-arrange(outputfile_4,desc(frequency_4))
+
+outputfile_5 <- read_table("C:/Users/user/Desktop/R/1109_Midterm/project/hatentutest_5.txt",col_names =FALSE)
+outputfile_5 <- as_tibble(table(unlist(as.data.frame(outputfile_5))))
+colnames(outputfile_5) <- c("term", "frequency_5")
+outputfile_5 <-arrange(outputfile_5,desc(frequency_5))
+
+outputfile_6 <- read_table("C:/Users/user/Desktop/R/1109_Midterm/project/hatentutest_6.txt",col_names =FALSE)
+outputfile_6 <- as_tibble(table(unlist(as.data.frame(outputfile_6))))
+colnames(outputfile_6) <- c("term", "frequency_6")
+outputfile_6 <-arrange(outputfile_6,desc(frequency_6))
+
+hatemessage<- merge(outputfile_1, outputfile_2, by='term', all=TRUE)  
+hatemessage[is.na(hatemessage)] <- 0   
+
+hatemessage<- merge(hatemessage, outputfile_3, by='term', all=TRUE)  
+hatemessage[is.na(hatemessage)] <- 0
+
+hatemessage<- merge(hatemessage, outputfile_4, by='term', all=TRUE)  
+hatemessage[is.na(hatemessage)] <- 0
+
+hatemessage<- merge(hatemessage, outputfile_5, by='term', all=TRUE)  
+hatemessage[is.na(hatemessage)] <- 0
+
+hatemessage<- merge(hatemessage, outputfile_6, by='term', all=TRUE)  
+hatemessage[is.na(hatemessage)] <- 0
+
+
+
+hatehatehate<-data.frame(term=hatemessage$term,frequency=(hatemessage$frequency_1+hatemessage$frequency_2+hatemessage$frequency_3+hatemessage$frequency_4+hatemessage$frequency_5+hatemessage$frequency_6))
+
+hatehatehate<-arrange(hatehatehate,desc(frequency))
+
+require(devtools)
+library(wordcloud2)
+
+hatehate<-data.frame(term=hatehatehate[12:1533,1], frequency=hatehatehate[12:1533,2])
+
+wordcloud2(hatehate, size = 0.5, fontFamily = "微軟正黑體", color = "random-light", backgroundColor = "black")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
